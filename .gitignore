@@ -1,0 +1,7 @@
+init.vim.bak
+lua-language-server
+node_modules
+package-lock.json
+sessions
+.kube/
+.netrwhist

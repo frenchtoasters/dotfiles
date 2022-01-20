@@ -48,7 +48,7 @@ require("telescope").setup({
 	},
 	extensions = {
 		k8s_commands = {
-			kubeconfig = "/home/toast/.kube/test-cofig"
+			kubeconfig = "/home/tfrench/kube/kubeconfig/tfrench"
 		},
 	}
 })
@@ -78,7 +78,7 @@ require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("k8s_commands")
 require("telescope").load_extension("linode_commands")
 require("telescope").load_extension("neoclip")
-require("telescope").load_extension("docker_commands")
+-- require("telescope").load_extension("docker_commands")
 
 require("indent_blankline").setup({
 	char = "┊",

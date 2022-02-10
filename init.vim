@@ -28,7 +28,7 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'windwp/nvim-autopairs'
 "Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " gofmt, goimports
-Plug 'davidhalter/jedi-vim' " python stuff
+" Plug 'davidhalter/jedi-vim' " python stuff
 call plug#end()
 " Personal config
 autocmd VimEnter * lua require('settings')

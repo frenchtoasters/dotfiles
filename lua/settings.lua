@@ -3,7 +3,7 @@ set.tabstop        = 4
 set.shiftwidth     = 4
 set.laststatus     = 2
 set.textwidth      = 0
-set.colorcolumn    = 80
+set.colorcolumn    = "80"
 set.wildmode       = 'longest,list,full'
 set.encoding       = 'utf-8'
 set.clipboard      = 'unnamedplus'
@@ -49,6 +49,9 @@ vim.g['signify_sign_delete']            = '│'
 vim.g['signify_sign_change']            = '│'
 vim.g['cursorhold_updatetime']          = 100
 vim.g['seoul256_srgb']                  = 1
+vim.g['jedi#goto_command']              = '<leader>t'
+vim.g['jedi#goto_assignments_command']  = '<leader>y'
+vim.g['jedi#goto_stubs_command']        = '<leader>i'
 vim.cmd [[
 	syntax on
 ]]

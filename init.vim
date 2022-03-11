@@ -13,7 +13,6 @@ Plug 'vim-airline/vim-airline-themes' " Bottom bar fancy stuff
 Plug 'junegunn/seoul256.vim' " Theme
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'mhinz/vim-signify' " Git changes on side file :cheifskiss:
-Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'APZelos/blamer.nvim' " Git blamer
 Plug 'terrortylor/nvim-comment' " Comment hot keys
@@ -28,7 +27,7 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'windwp/nvim-autopairs'
 "Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " gofmt, goimports
-" Plug 'davidhalter/jedi-vim' " python stuff
+Plug 'davidhalter/jedi-vim' " python stuff
 call plug#end()
 " Personal config
 autocmd VimEnter * lua require('settings')

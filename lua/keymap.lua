@@ -29,6 +29,6 @@ Map("n","<leader>g", ":lua require('telescope.builtin').live_grep()<CR>", {norem
 Map("n","<leader>tf", ":lua require('telescope.builtin').help_tags()<CR>", {noremap=true})
 Map("n","<leader>k", ":lua require('telescope').load_extension('k8s_commands').k8s(require('telescope.themes').get_ivy())<CR>", {noremap=true})
 Map("n","<leader>j", ":lua require('telescope').load_extension('linode_commands').linode_ssh(require('telescope.themes').get_ivy())<CR>", {noremap=true})
--- Map("n","<leader>ps", ":lua require('telescope').load_extension('docker_commands').docker_version(require('telescope.themes').get_ivy())<CR>", {noremap=true})
+Map("n","<leader>ps", ":lua require('telescope').load_extension('docker_commands').docker_version(require('telescope.themes').get_ivy())<CR>", {noremap=true})
 Map("n","<leader>y", ":lua require('telescope').load_extension('neoclip').neoclip(require('telescope.themes').get_ivy())<CR>", {noremap=true})
 Map("t","<Esc>", "<C-\\><C-n>", {noremap=true})

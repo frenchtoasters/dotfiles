@@ -16,7 +16,7 @@ Plug 'mhinz/vim-signify' " Git changes on side file :cheifskiss:
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'APZelos/blamer.nvim' " Git blamer
 Plug 'terrortylor/nvim-comment' " Comment hot keys
-" Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc-go coc-pairs coc-lua coc-python coc-snippets
+"Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc-go coc-pairs coc-lua coc-python coc-snippets
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -27,7 +27,7 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'windwp/nvim-autopairs'
 "Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " gofmt, goimports
-Plug 'davidhalter/jedi-vim' " python stuff
+Plug 'davidhalter/jedi-vim'
 call plug#end()
 " Personal config
 autocmd VimEnter * lua require('settings')

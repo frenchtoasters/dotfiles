@@ -1,7 +1,7 @@
 local actions = require('telescope.actions')
 local cmp = require('cmp')
 local lspconfig = require('lspconfig')
-local servers = {"gopls", "pyright", "terraformls", "dockerls", "bashls", "ansiblels", "vimls"}
+local servers = {"gopls", "pyright", "terraformls", "dockerls", "bashls", "vimls"}
 
 USER = vim.fn.expand('$USER')
 
@@ -48,7 +48,7 @@ require("telescope").setup({
 	},
 	extensions = {
 		k8s_commands = {
-			kubeconfig = "/home/tfrench/kube/kubeconfig/tfrench"
+			kubeconfig = "/users/tfrench/kube/kubeconfig/tfrench"
 		},
 	}
 })
@@ -111,6 +111,7 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
+require('lspconfig').pyright.setup{}
 require('lspconfig').sumneko_lua.setup {
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
     settings = {

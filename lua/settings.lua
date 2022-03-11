@@ -50,8 +50,10 @@ vim.g['signify_sign_change']            = '│'
 vim.g['cursorhold_updatetime']          = 100
 vim.g['seoul256_srgb']                  = 1
 vim.g['jedi#goto_command']              = '<leader>t'
-vim.g['jedi#goto_assignments_command']  = '<leader>y'
-vim.g['jedi#goto_stubs_command']        = '<leader>i'
+vim.g['jedi#goto_assignments_command']  = '<leader>>'
+vim.g['jedi#goto_stubs_command']        = '<leader>.'
+vim.g['jedi#show_call_signatures']      = 0
+vim.g['jedi#completions_enabled']       = 0
 vim.cmd [[
 	syntax on
 ]]

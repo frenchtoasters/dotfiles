@@ -1,7 +1,7 @@
 local actions = require('telescope.actions')
 local cmp = require('cmp')
 local lspconfig = require('lspconfig')
-local servers = {"gopls", "pyright", "terraformls", "dockerls", "bashls", "ansiblels", "vimls"}
+local servers = {"gopls", "pyright", "terraformls", "dockerls", "bashls", "vimls"}
 
 USER = vim.fn.expand('$USER')
 
@@ -48,7 +48,7 @@ require("telescope").setup({
 	},
 	extensions = {
 		k8s_commands = {
-			kubeconfig = "/home/toast/.kube/test-cofig"
+			kubeconfig = "/users/tfrench/kube/kubeconfig/tfrench"
 		},
 	}
 })
@@ -78,7 +78,7 @@ require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("k8s_commands")
 require("telescope").load_extension("linode_commands")
 require("telescope").load_extension("neoclip")
-require("telescope").load_extension("docker_commands")
+-- require("telescope").load_extension("docker_commands")
 
 require("indent_blankline").setup({
 	char = "┊",

@@ -13,7 +13,6 @@ Plug 'vim-airline/vim-airline-themes' " Bottom bar fancy stuff
 Plug 'junegunn/seoul256.vim' " Theme
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'mhinz/vim-signify' " Git changes on side file :cheifskiss:
-Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'APZelos/blamer.nvim' " Git blamer
 Plug 'terrortylor/nvim-comment' " Comment hot keys
@@ -26,7 +25,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'windwp/nvim-autopairs'
-Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+"Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " gofmt, goimports
 Plug 'davidhalter/jedi-vim'
 call plug#end()
@@ -35,7 +34,7 @@ autocmd VimEnter * lua require('settings')
 autocmd VimEnter * lua require('keymap')
 autocmd VimEnter * lua require('toast')
 autocmd VimEnter * LspStart
-autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
+autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync(nil, 2000)
 color seoul256
 hi NonText guifg=250 guifg=none
 hi Normal guifg=252 guibg=none

@@ -1,0 +1,87 @@
+# Path to your oh-my-zsh installation.
+export ZSH="/users//tfrench/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="frisk"
+
+plugins=(git docker terraform)
+
+source $ZSH/oh-my-zsh.sh
+
+source <(kubectl completion zsh)
+
+complete -F __start_kubectl k
+autoload -Uz compinit
+compinit
+
+kconfig () {
+        export KUBECONFIG=/users/tfrench/kube/kubeconfig/"$1"
+}
+
+lconfig () {
+	ls /users/tfrench/kube/kubeconfig | grep --color -E "$(basename $KUBECONFIG)|$" $2
+}
+
+export GPG_TTY=$(tty)
+export GO111MODULE=on
+export DENO_INSTALL="/users/tfrench/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+export GOBIN=/users/tfrench/.gvm/pkgsets/go1.16.4/global/bin
+export VIM=/usr/local/bin/nvim
+export VIMRUNTIME=/usr/local/share/nvim/runtime
+export EDITOR='nvim'
+export GVM_ROOT=/users//tfrench/.gvm
+. $GVM_ROOT/scripts/gvm-default
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$HOME/.tfenv/bin:$PATH"
+export PATH="/users/linuxbrew/.linuxbrew/bin/brew shellenv:$PATH"
+export PATH="$HOME/tools/lua-language-server/bin/macOS:$PATH"
+export PATH="$HOME/tools/lua-language-server/bin/Linux:$PATH"
+
+export LIBVA_DRIVER_NAME=iHD
+export MOZ_DISABLE_RDD_SANDBOX=1
+export MOZ_X11_EGL=1
+export MOZ_ENABLE_WAYLAND=1
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -s "/users/tfrench/.gvm/scripts/gvm" ]] && source "/users/tfrench/.gvm/scripts/gvm"
+
+alias k=kubectl
+alias tfa='terraform apply'
+alias tfaa='terraform apply --auto-approve'
+alias tfd='terraform destroy'
+alias tfda='terraform destroy --auto-approve'
+alias kn="k get ns"
+alias ktest="k get pods -n kube-system-test"
+alias watch="watch "
+alias luamake=/users/tfrench/.config/nvim/lua-language-server/3rd/luamake/luamake
+# alias pbcopy='xclip -selection clipboard'
+# alias pbpaste='xclip -selection clipboard -o'
+
+alias python='python3'
+
+function kube_config () {
+  if [[ "$(echo $KUBECONFIG)" != "" ]]; then
+    export PS1="
+%{$fg[white]%}%/%{$reset_color%} $(git_prompt_info)$(bzr_prompt_info)%{$reset_color%} %{$fg[green]%}[$(basename $KUBECONFIG)]%{$reset_color%} %{$fg[white]%}[%T]%{$reset_color%}
+%{$fg_bold[black]%}> %{$reset_color%}"
+  else
+    export PS1="
+%{$fg[white]%}%/%{$reset_color%} $(git_prompt_info)$(bzr_prompt_info)%{$reset_color%} %{$fg[white]%}[%T]%{$reset_color%}
+%{$fg_bold[black]%}> %{$reset_color%}"
+  fi
+}
+
+precmd () { kube_config }
+
+#####
+# OSX
+#####
+alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+export PATH="/Users/tfrench/.local/share/nvim/lsp_servers/terraform/terraform-ls:$PATH"
+export PATH="/Users/tfrench/.local/share/nvim/lsp_servers/vim/.bin/vim-language-server:$PATH"
+
+

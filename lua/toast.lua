@@ -110,7 +110,7 @@ for _, lsp in ipairs(servers) do
 		capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 	})
 end
-
+require('lspconfig').pyright.setup{}
 require('lspconfig').sumneko_lua.setup {
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
     settings = {

@@ -28,12 +28,14 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'windwp/nvim-autopairs'
 Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " gofmt, goimports
+Plug 'davidhalter/jedi-vim'
 call plug#end()
 " Personal config
 autocmd VimEnter * lua require('settings')
 autocmd VimEnter * lua require('keymap')
 autocmd VimEnter * lua require('toast')
 autocmd VimEnter * LspStart
+autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
 color seoul256
 hi NonText guifg=250 guifg=none
 hi Normal guifg=252 guibg=none

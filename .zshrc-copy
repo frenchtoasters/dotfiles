@@ -29,14 +29,14 @@ export GPG_TTY=$(tty)
 export GO111MODULE=on
 export DENO_INSTALL="/users/tfrench/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
-export GOBIN=/users/tfrench/.gvm/pkgsets/go1.16.4/global/bin
+export GOBIN=$USERHOME/.gvm/pkgsets/go1.18/global/bin
 export VIM=/usr/local/bin/nvim
 export VIMRUNTIME=/usr/local/share/nvim/runtime
 export EDITOR='nvim'
-export GVM_ROOT=/users//tfrench/.gvm
+export GVM_ROOT=$USERHOME/.gvm
 . $GVM_ROOT/scripts/gvm-default
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export PATH="$HOME/.tfenv/bin:$PATH"
+export PATH="$USERHOME/.tfenv/bin:$PATH"
 export PATH="/users/linuxbrew/.linuxbrew/bin/brew shellenv:$PATH"
 export PATH="$HOME/tools/lua-language-server/bin/macOS:$PATH"
 export PATH="$HOME/tools/lua-language-server/bin/Linux:$PATH"
@@ -47,7 +47,7 @@ export MOZ_X11_EGL=1
 export MOZ_ENABLE_WAYLAND=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[[ -s "/users/tfrench/.gvm/scripts/gvm" ]] && source "/users/tfrench/.gvm/scripts/gvm"
+[[ -s "$USERHOME/.gvm/scripts/gvm" ]] && source "$USERHOME/.gvm/scripts/gvm"
 
 alias k=kubectl
 alias tfa='terraform apply'

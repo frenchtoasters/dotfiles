@@ -58,6 +58,7 @@ alias kn="k get ns"
 alias ktest="k get pods -n kube-system-test"
 alias watch="watch "
 alias luamake=$HOME/.config/nvim/lua-language-server/3rd/luamake/luamake
+alias badpods="k get pods -A | grep -v 'Running\|Completed'"
 # alias pbcopy='xclip -selection clipboard'
 # alias pbpaste='xclip -selection clipboard -o'
 

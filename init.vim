@@ -4,6 +4,7 @@ Plug 'nvim-lua/popup.nvim' " General
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'junegunn/fzf', {'do': { -> fzf#install() } }
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'frenchtoasters/telescope-kubectl.nvim'
 Plug 'frenchtoasters/telescope-linode.nvim'

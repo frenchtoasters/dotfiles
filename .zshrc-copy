@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/users//tfrench/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -18,22 +18,22 @@ autoload -Uz compinit
 compinit
 
 kconfig () {
-        export KUBECONFIG=/users/tfrench/kube/kubeconfig/"$1"
+        export KUBECONFIG=$HOME/kube/kubeconfig/"$1"
 }
 
 lconfig () {
-	ls /users/tfrench/kube/kubeconfig | grep --color -E "$(basename $KUBECONFIG)|$" $2
+	ls $HOME/kube/kubeconfig | grep --color -E "$(basename $KUBECONFIG)|$" $2
 }
 
 export GPG_TTY=$(tty)
 export GO111MODULE=on
 export DENO_INSTALL="/users/tfrench/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
-export GOBIN=/users/tfrench/.gvm/pkgsets/go1.16.4/global/bin
+export GOBIN=$HOME/.gvm/pkgsets/go1.18/global/bin
 export VIM=/usr/local/bin/nvim
 export VIMRUNTIME=/usr/local/share/nvim/runtime
 export EDITOR='nvim'
-export GVM_ROOT=/users//tfrench/.gvm
+export GVM_ROOT=$HOME/.gvm
 . $GVM_ROOT/scripts/gvm-default
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$HOME/.tfenv/bin:$PATH"
@@ -47,7 +47,7 @@ export MOZ_X11_EGL=1
 export MOZ_ENABLE_WAYLAND=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[[ -s "/users/tfrench/.gvm/scripts/gvm" ]] && source "/users/tfrench/.gvm/scripts/gvm"
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 alias k=kubectl
 alias tfa='terraform apply'
@@ -57,7 +57,8 @@ alias tfda='terraform destroy --auto-approve'
 alias kn="k get ns"
 alias ktest="k get pods -n kube-system-test"
 alias watch="watch "
-alias luamake=/users/tfrench/.config/nvim/lua-language-server/3rd/luamake/luamake
+alias luamake=$HOME/.config/nvim/lua-language-server/3rd/luamake/luamake
+alias badpods="k get pods -A | grep -v 'Running\|Completed'"
 # alias pbcopy='xclip -selection clipboard'
 # alias pbpaste='xclip -selection clipboard -o'
 

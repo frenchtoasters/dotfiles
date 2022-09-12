@@ -18,6 +18,16 @@ else
     print("Unsupported system for sumneko")
 end
 
+require('nvim-treesitter.configs').setup({
+	highlight = {
+		enable = true
+	},
+	textobjects = {
+		enable = true
+	},
+	ensure_installed = {"lua", "python", "go", "yaml", "json", "hcl", "rust"}
+})
+
 require("telescope").setup({
 	defaults= {
 		file_sorter = require("telescope.sorters").get_fzy_sorter,
@@ -59,15 +69,6 @@ require('nvim_comment').setup({
 	operator_mapping = "<leader>c"
 })
 
-require('nvim-treesitter.configs').setup({
-	highlight = {
-		enable = true
-	},
-	textobjects = {
-		enable = true
-	},
-	ensure_installed = "maintained"
-})
 
 require('nvim-autopairs').setup()
 require('harpoon').setup()
@@ -92,7 +93,7 @@ cmp.setup({
 		end,
 	},
 	mapping = cmp.mapping.preset.insert({
-	    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     	    ['<C-f>'] = cmp.mapping.scroll_docs(4),
     	    ['<C-Space>'] = cmp.mapping.complete(),
     	    ['<C-e>'] = cmp.mapping.close(),
@@ -131,3 +132,44 @@ require('lspconfig').sumneko_lua.setup {
 	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 }
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+-- local opts = {
+--     tools = { -- rust-tools options
+--         autoSetHints = true,
+--         hover_with_actions = true,
+--         inlay_hints = {
+--             show_parameter_hints = false,
+--             parameter_hints_prefix = "",
+--             other_hints_prefix = "",
+--         },
+--     },
+-- }
+
+-- require('rust-tools').setup()
+
+-- Enable rust_analyzer
+require'lspconfig'.rust_analyzer.setup({
+    capabilities=capabilities,
+    -- on_attach is a callback called when the language server attachs to the buffer
+    -- on_attach = on_attach,
+    settings = {
+      -- to enable rust-analyzer settings visit:
+      -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+      ["rust-analyzer"] = {
+        -- enable clippy diagnostics on save
+        checkOnSave = {
+          command = "clippy"
+        },
+      }
+    }
+})
+
+-- Enable diagnostics
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics, {
+--     virtual_text = false,
+--     signs = true,
+--     update_in_insert = true,
+--   }
+-- )

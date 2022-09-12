@@ -35,6 +35,7 @@ Plug 'windwp/nvim-autopairs'
 "Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " gofmt, goimports
 Plug 'davidhalter/jedi-vim'
+Plug 'simrat39/rust-tools.nvim'
 call plug#end()
 " Personal config
 autocmd VimEnter * lua require('settings')

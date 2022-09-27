@@ -1,7 +1,6 @@
 local actions = require('telescope.actions')
 local cmp = require('cmp')
 local lspconfig = require('lspconfig')
-local servers = {"gopls", "terraformls", "dockerls", "bashls", "vimls"}
 local opts = { noremap=true, silent=true }
 
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting(opts)]]
@@ -53,7 +52,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<leader>r', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
@@ -140,19 +139,17 @@ cmp.setup {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'buffer' },
-	},
+	}
 }
 
+local servers = {"gopls", "terraformls", "dockerls", "bashls", "vimls", "jedi_language_server"}
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
 		on_attach = on_attach,
-		capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+		capabilities = capabilities,
 	})
 end
-
-require'lspconfig'.jedi_language_server.setup {
-	on_attach = on_attach
-}
 
 require('lspconfig').sumneko_lua.setup {
 	on_attach = on_attach,
@@ -171,11 +168,11 @@ require('lspconfig').sumneko_lua.setup {
             }
         }
     },
-	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+	capabilities = capabilities,
 }
 
 require'lspconfig'.rust_analyzer.setup {
-    capabilities= vim.lsp.protocol.make_client_capabilities(),
+    capabilities= capabilities,
     on_attach = on_attach,
     settings = {
       ["rust-analyzer"] = {

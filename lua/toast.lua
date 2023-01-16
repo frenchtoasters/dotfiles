@@ -3,7 +3,7 @@ local cmp = require('cmp')
 local lspconfig = require('lspconfig')
 local opts = { noremap=true, silent=true }
 
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting(opts)]]
+vim.cmd [[autocmd BufWritePre *.tf lua vim.lsp.buf.formatting(opts)]]
 
 USER = vim.fn.expand('$USER')
 
@@ -29,7 +29,7 @@ vim.keymap.set("n","<leader>a", ":lua require('harpoon.ui').nav_file(1)<CR>", op
 vim.keymap.set("n","<leader>s", ":lua require('harpoon.ui').nav_file(2)<CR>", opts)
 vim.keymap.set("n","<leader>d", ":lua require('harpoon.ui').nav_file(3)<CR>", opts)
 vim.keymap.set("n","<leader>f", ":lua require('harpoon.ui').nav_file(4)<CR>", opts)
-vim.keymap.set("n","<leader>bf", ":lua require('telescope.builtin').find_files()<CR>", opts)
+vim.keymap.set("n","<leader>df", ":lua require('telescope.builtin').find_files()<CR>", opts)
 vim.keymap.set("n","<leader>g", ":lua require('telescope.builtin').live_grep()<CR>", opts)
 vim.keymap.set("n","<leader>tf", ":lua require('telescope.builtin').help_tags()<CR>", opts)
 vim.keymap.set("n","<leader>k", ":lua require('telescope').load_extension('k8s_commands').k8s(require('telescope.themes').get_ivy())<CR>", opts)

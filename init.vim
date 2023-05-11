@@ -23,16 +23,15 @@ Plug 'mhinz/vim-signify' " Git changes on side file :cheifskiss:
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'APZelos/blamer.nvim' " Git blamer
 Plug 'terrortylor/nvim-comment' " Comment hot keys
-" Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc-go coc-pairs coc-lua coc-python coc-snippets
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
+Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'windwp/nvim-autopairs'
-" Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " gofmt, goimports
 Plug 'davidhalter/jedi-vim'
 Plug 'simrat39/rust-tools.nvim'

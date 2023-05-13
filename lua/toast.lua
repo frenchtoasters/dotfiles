@@ -3,22 +3,9 @@ local cmp = require('cmp')
 local lspconfig = require('lspconfig')
 local opts = { noremap=true, silent=true }
 
-vim.cmd [[autocmd BufWritePre *.tf lua vim.lsp.buf.formatting(opts)]]
+vim.cmd [[autocmd BufWritePre *.tf lua vim.lsp.buf.format(opts)]]
 
 USER = vim.fn.expand('$USER')
-
-local sumneko_root_path = ""
-local sumneko_binary = ""
-
-if vim.fn.has("mac") == 1 then
-    sumneko_root_path = "/Users/" .. USER .. "/.config/nvim/lua-language-server"
-    sumneko_binary = "/Users/" .. USER .. "/.config/nvim/lua-language-server/bin/macOS/lua-language-server"
-elseif vim.fn.has("unix") == 1 then
-    sumneko_root_path = "/home/" .. USER .. "/.config/nvim/lua-language-server"
-    sumneko_binary = "/home/" .. USER .. "/.config/nvim/lua-language-server/bin/Linux/lua-language-server"
-else
-    print("Unsupported system for sumneko")
-end
 
 vim.g.mapleader = ','
 vim.keymap.set("n","<leader>h",":lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
@@ -143,7 +130,7 @@ cmp.setup {
 }
 
 local servers = {"gopls", "terraformls", "dockerls", "bashls", "vimls", "jedi_language_server"}
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
 		on_attach = on_attach,
@@ -151,9 +138,10 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
-require('lspconfig').sumneko_lua.setup {
+require('mason').setup()
+
+require('lspconfig').lua_ls.setup {
 	on_attach = on_attach,
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
     settings = {
         Lua = {
             runtime = {
@@ -171,7 +159,7 @@ require('lspconfig').sumneko_lua.setup {
 	capabilities = capabilities,
 }
 
-require'lspconfig'.rust_analyzer.setup {
+require('lspconfig').rust_analyzer.setup {
     capabilities= capabilities,
     on_attach = on_attach,
     settings = {

@@ -4,6 +4,8 @@ local lspconfig = require('lspconfig')
 local opts = { noremap=true, silent=true }
 
 vim.cmd [[autocmd BufWritePre *.tf lua vim.lsp.buf.format(opts)]]
+vim.cmd [[autocmd BufEnter *.tf lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")]]
+vim.cmd [[autocmd BufFilePost *.tf lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")]]
 
 USER = vim.fn.expand('$USER')
 

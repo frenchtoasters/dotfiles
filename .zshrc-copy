@@ -49,6 +49,7 @@ export MOZ_ENABLE_WAYLAND=1
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
+alias lg=lazygit
 alias k=kubectl
 alias tfa='terraform apply'
 alias tfaa='terraform apply --auto-approve'

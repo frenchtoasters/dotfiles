@@ -3,3 +3,4 @@ golang latest
 neovim ref:master
 terraform latest
 lazygit latest
+krew latest

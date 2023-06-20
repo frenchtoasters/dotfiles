@@ -4,3 +4,4 @@ neovim ref:master
 terraform latest
 lazygit latest
 krew latest
+fzf latest

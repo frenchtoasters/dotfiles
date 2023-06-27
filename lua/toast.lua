@@ -38,8 +38,9 @@ vim.keymap.set("n", "<leader><up>", "<C-W><up>", opts)
 vim.keymap.set("n", "<leader><left>", "<C-W><left>", opts)
 vim.keymap.set("n", "<leader><right>", "<C-W><right>", opts)
 vim.keymap.set("n", "<leader>z", require("lsp_lines").toggle, opts)
+vim.keymap.set("n", "<leader>x", ":GoAddTags<CR>", opts)
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }

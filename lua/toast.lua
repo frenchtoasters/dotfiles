@@ -37,6 +37,7 @@ vim.keymap.set("n", "<leader><down>", "<C-W><down>", opts)
 vim.keymap.set("n", "<leader><up>", "<C-W><up>", opts)
 vim.keymap.set("n", "<leader><left>", "<C-W><left>", opts)
 vim.keymap.set("n", "<leader><right>", "<C-W><right>", opts)
+vim.keymap.set("n", "<leader>z", require("lsp_lines").toggle, opts)
 
 local on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -178,6 +179,8 @@ require('lspconfig').rust_analyzer.setup {
 		}
 	}
 }
+
+require("lsp_lines").setup()
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(

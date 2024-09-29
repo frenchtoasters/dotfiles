@@ -1,5 +1,5 @@
 local actions = require('telescope.actions')
-local cmp = require('cmp')
+local cmp = require("cmp")
 local lspconfig = require('lspconfig')
 local opts = { noremap = true, silent = true }
 
@@ -37,7 +37,7 @@ vim.keymap.set("n", "<leader><down>", "<C-W><down>", opts)
 vim.keymap.set("n", "<leader><up>", "<C-W><up>", opts)
 vim.keymap.set("n", "<leader><left>", "<C-W><left>", opts)
 vim.keymap.set("n", "<leader><right>", "<C-W><right>", opts)
-vim.keymap.set("n", "<leader>z", require("lsp_lines").toggle, opts)
+--vim.keymap.set("n", "<leader>z", require("lsp_lines").toggle, opts)
 vim.keymap.set("n", "<leader>x", ":GoAddTags<CR>", opts)
 
 local on_attach = function(_, bufnr)
@@ -50,7 +50,8 @@ local on_attach = function(_, bufnr)
 	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
 	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set('n', '<leader>r', vim.lsp.buf.references, bufopts)
-	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+	vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
+	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 end
 
 require('nvim-treesitter.configs').setup {
@@ -114,9 +115,36 @@ require("telescope").load_extension("k8s_commands")
 require("telescope").load_extension("linode_commands")
 require("telescope").load_extension("neoclip")
 
-require("indent_blankline").setup {
-	char = "┊",
-	show_current_context = true,
+local highlight = {
+	"RainbowRed",
+	"RainbowYellow",
+	"RainbowBlue",
+	"RainbowOrange",
+	"RainbowGreen",
+	"RainbowViolet",
+	"RainbowCyan",
+}
+
+local hooks = require "ibl.hooks"
+-- create the highlight groups in the highlight setup hook, so they are reset
+-- every time the colorscheme changes
+hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+	vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+	vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+	vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+	vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+	vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+	vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+	vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+end)
+
+require("ibl").setup {
+	indent = {
+		highlight = highlight
+	},
+	scope = {
+		enabled = false
+	}
 }
 
 cmp.setup {
@@ -133,8 +161,8 @@ cmp.setup {
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 	}),
 	sources = {
-		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
+		{ name = 'nvim_lsp' },
 		{ name = 'buffer' },
 	}
 }

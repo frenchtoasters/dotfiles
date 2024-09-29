@@ -33,9 +33,8 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'windwp/nvim-autopairs'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " gofmt, goimports
-Plug 'davidhalter/jedi-vim'
+Plug 'jmsegrev/lsp_lines.nvim'
 Plug 'simrat39/rust-tools.nvim'
-Plug 'maan2003/lsp_lines.nvim'
 call plug#end()
 " Personal config
 autocmd VimEnter * lua require('settings')

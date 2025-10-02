@@ -32,14 +32,25 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'windwp/nvim-autopairs'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " gofmt, goimports
 Plug 'jmsegrev/lsp_lines.nvim'
 Plug 'simrat39/rust-tools.nvim'
+Plug 'epwalsh/obsidian.nvim'
+Plug 'folke/todo-comments.nvim'
+Plug 'someone-stole-my-name/yaml-companion.nvim'
+Plug 'hedengran/fga.nvim'
+Plug 'kiddos/gemini.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'jackMort/ChatGPT.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'folke/trouble.nvim'
+Plug 'ray-x/go.nvim'
+Plug 'ray-x/guihua.lua'
+Plug 'olimorris/codecompanion.nvim'
 call plug#end()
 " Personal config
 autocmd VimEnter * lua require('settings')
 autocmd VimEnter * lua require('toast')
-autocmd VimEnter * LspStart
+autocmd VimEnter * lua require('lsp')
 color seoul256
 hi NonText guifg=250 guifg=none
 hi Normal guifg=252 guibg=none

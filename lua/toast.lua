@@ -1,14 +1,14 @@
 local actions = require('telescope.actions')
 
-require('nvim-treesitter.configs').setup {
-	ensure_installed = { "lua", "python", "go", "yaml", "json", "hcl", "rust" },
+require('nvim-treesitter').setup {
+	ensure_installed = { "lua", "python", "go", "yaml", "json", "hcl", "rust", "markdown", "markdown_inline" },
 	sync_install = false,
 	auto_install = true,
 	ignore_install = {},
 
 	highlight = {
 		enable = true,
-		additional_vim_regex_highlighting = false,
+		additional_vim_regex_highlighting = true,
 	},
 
 	textobjects = {
@@ -22,6 +22,15 @@ require('nvim-treesitter.configs').setup {
 	},
 	modules = {}
 }
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("treesitter_auto_start", { clear = true }),
+	callback = function(ev)
+		-- Start TS highlighting if a parser exists; ignore errors for ft with no parser
+		pcall(vim.treesitter.start, ev.buf)
+	end,
+})
+
 
 require("telescope").setup {
 	defaults = {
@@ -127,12 +136,12 @@ require("obsidian").setup({
 })
 
 require('fga').setup({
-	install_treesitter_grammar = true,
+	-- install_treesitter_grammar = true,
 	lsp_server = "/Users/tfrench/.config/nvim/plugged/vscode-ext/server/out/server.node.js"
 })
 
 require('gemini').setup({
-	model = "claude-3-7-sonnet@20250219",
+	model = "gemini-3-pro",
 	max_output_token = 81960,
 	task = {
 		get_system_text = function()
@@ -147,18 +156,27 @@ require('yaml-companion').setup()
 
 require('go').setup()
 require("codecompanion").setup({
+	prompt_library = {
+		markdown = {
+			dirs = {
+				vim.fn.getcwd() .. "/.prompts",
+				"~/.config/nvim/prompts",
+			},
+		},
+	},
 	strategies = {
 		chat = {
-			adapter = "gemini",
-			model = "claude-sonnet-4-20250514",
+			-- adapter = "gemini",
+			-- model = "models/gemini-3-pro",
+			adapter = "local_chat",
 		},
 		inline = {
 			adapter = "gemini",
-			model = "claude-sonnet-4-20250514",
+			model = "models/gemini-3-pro",
 		},
 		cmd = {
 			adapter = "gemini",
-			model = "claude-sonnet-4-20250514",
+			model = "models/gemini-3-pro",
 		}
 	},
 	adapters = {
@@ -169,5 +187,61 @@ require("codecompanion").setup({
 				},
 			})
 		end,
+		http = {
+			local_chat = function()
+				return require("codecompanion.adapters").extend("openai_compatible", {
+					env = {
+						-- url = "http://spark-f6cd.local:8000",
+						-- url = "http://localhost:4000",
+						url = "http://jeeves-studio-21.local:52415",
+						chat_url = "/v1/chat/completions",
+						api_key = "sk-1234",
+					},
+					schema = {
+						model = {
+							-- default = "mlx-community/GLM-4.7-8bit-gs32",
+							default = "mlx-community/GLM-4.7-Flash-8bit",
+						}
+					},
+					-- model = "jeeves"
+					-- model = "auto"
+					-- model = "mlx-community/GLM-4.7-8bit-gs32",
+				})
+			end,
+		},
 	},
+	rules = {
+		speedy = {
+			description = "Rules file for the speedy project",
+			files = {
+				"~/.config/nvim/rules/speedy.md",
+			},
+		},
+	},
+	display = {
+		action_palette = {
+			opts = {
+				show_prompt_library_builtins = false,
+			}
+		},
+	},
+	extensions = {
+		mcphub = {
+			callback = "mcphub.extensions.codecompanion",
+			opts = {
+				make_tools = true,
+				show_server_tools_in_chat = true,
+				add_mcp_prefix_to_tool_names = false,
+				show_result_in_chat = true,
+				format_tool = nil,
+				make_vars = true,
+				make_slash_commands = true,
+			}
+		}
+	}
 })
+
+require("extensions.fidget-spinner"):init()
+require("fidget").setup()
+
+require("mcphub").setup()

@@ -5,7 +5,7 @@ set.tabstop                             = 4
 set.shiftwidth                          = 4
 set.laststatus                          = 2
 set.textwidth                           = 0
-set.colorcolumn                         = '80'
+set.colorcolumn                         = '120'
 set.wildmode                            = 'longest,list,full'
 set.encoding                            = 'utf-8'
 set.clipboard                           = 'unnamedplus'
@@ -29,34 +29,34 @@ set.list                                = true
 set.foldmethod                          = 'indent'
 set.listchars                           = 'trail:┊,tab:┊ '
 vim.g['blamer_enabled']                 = 1
-vim.g['go_highlight_build_constraints'] = 1
-vim.g['go_highlight_extra_types']       = 1
-vim.g['go_highlight_fields']            = 1
-vim.g['go_highlight_functions']         = 1
-vim.g['go_highlight_methods']           = 1
-vim.g['go_highlight_operators']         = 1
-vim.g['go_highlight_structs']           = 1
-vim.g['go_highlight_types']             = 1
-vim.g['go_auto_sameids']                = 0
-vim.g['go_auto_type_info']              = 1
-vim.g['go_addtags_transform']           = 'snakecase'
+-- vim.g['go_highlight_build_constraints'] = 1
+-- vim.g['go_highlight_extra_types']       = 1
+-- vim.g['go_highlight_fields']            = 1
+-- vim.g['go_highlight_functions']         = 1
+-- vim.g['go_highlight_methods']           = 1
+-- vim.g['go_highlight_operators']         = 1
+-- vim.g['go_highlight_structs']           = 1
+-- vim.g['go_highlight_types']             = 1
+-- vim.g['go_auto_sameids']                = 0
+-- vim.g['go_auto_type_info']              = 1
+-- vim.g['go_addtags_transform']           = 'snakecase'
 vim.g['airline#extensions#ale#enabled'] = 1
 vim.g['airline_powerline_fonts']        = 1
 vim.g['airline_section_z']              = ' %{strftime("%-I:%M %p")}'
 vim.g['airline_section_warning']        = ''
-vim.g['ale_sign_error']                 = '⤫'
-vim.g['ale_sign_warning']               = '⚠'
-vim.g['startify_fortune_use_unicode']   = 1
+-- vim.g['ale_sign_error']                 = '⤫'
+-- vim.g['ale_sign_warning']               = '⚠'
+-- vim.g['startify_fortune_use_unicode']   = 1
 vim.g['signify_sign_add']               = '│'
 vim.g['signify_sign_delete']            = '│'
 vim.g['signify_sign_change']            = '│'
 vim.g['cursorhold_updatetime']          = 100
 vim.g['seoul256_srgb']                  = 1
-vim.g['jedi#goto_command']              = "<leader>t"
-vim.g['jedi#goto_assignments_command']  = "<leader>>"
-vim.g['jedi#goto_stubs_command']        = "<leader>."
-vim.g['jedi#completions_enabled']       = 0
-vim.g['jedi#show_call_signatures']      = 0
+-- vim.g['jedi#goto_command']              = "<leader>t"
+-- vim.g['jedi#goto_assignments_command']  = "<leader>>"
+-- vim.g['jedi#goto_stubs_command']        = "<leader>."
+-- vim.g['jedi#completions_enabled']       = 0
+-- vim.g['jedi#show_call_signatures']      = 0
 vim.g['go_addtags_transform']           = 'camelcase'
 vim.cmd [[
 	syntax on
@@ -76,10 +76,20 @@ vim.diagnostic.config({
 	update_in_insert = true,
 	underline = true,
 	severity_sort = true,
-	virtual_lines = { only_current_line = false },
 })
 
-vim.cmd [[autocmd BufWritePre *.* lua vim.lsp.buf.format(opts)]]
+vim.o.statusline = "%!v:lua.Statusline()"
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	callback = function(args)
+		if vim.bo[args.buf].filetype == "python" then
+			return
+		end
+		vim.lsp.buf.format({ async = false })
+	end,
+})
+
+-- vim.cmd [[autocmd BufWritePre *.* lua vim.lsp.buf.format(opts)]]
 vim.cmd [[autocmd BufWritePre *.go lua vim.cmd("GoImports")]]
 
 vim.cmd [[autocmd BufEnter *.tf lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")]]
@@ -93,7 +103,7 @@ vim.keymap.set("n", "<leader>o", ":lua require('harpoon.term').gotoTerminal(2)<C
 vim.keymap.set("n", "<leader>a", ":lua require('harpoon.ui').nav_file(1)<CR>", opts)
 vim.keymap.set("n", "<leader>s", ":lua require('harpoon.ui').nav_file(2)<CR>", opts)
 vim.keymap.set("n", "<leader>d", ":lua require('harpoon.ui').nav_file(3)<CR>", opts)
-vim.keymap.set("n", "<leader>f", ":lua require('harpoon.ui').nav_file(4)<CR>", opts)
+-- vim.keymap.set("n", "<leader>f", ":lua require('harpoon.ui').nav_file(4)<CR>", opts)
 vim.keymap.set("n", "<leader>v", ":lua require('telescope.builtin').find_files()<CR>", opts)
 vim.keymap.set("n", "<leader>g", ":lua require('telescope.builtin').live_grep()<CR>", opts)
 vim.keymap.set("n", "<leader>t", ":TodoTelescope<CR>", opts)
@@ -113,8 +123,8 @@ vim.keymap.set("n", "<leader><down>", "<C-W><down>", opts)
 vim.keymap.set("n", "<leader><up>", "<C-W><up>", opts)
 vim.keymap.set("n", "<leader><left>", "<C-W><left>", opts)
 vim.keymap.set("n", "<leader><right>", "<C-W><right>", opts)
---vim.keymap.set("n", "<leader>z", require("lsp_lines").toggle, opts)
 vim.keymap.set("n", "<leader>x", ":GoAddTags<CR>", opts)
-vim.keymap.set("n", "<leader>b", ":ChatGPT<CR>", opts)
+vim.keymap.set("n", "<leader>b", ":CodeCompanionChat<CR>", opts)
 vim.keymap.set("n", "<leader>nb", ":ObsidianToday<CR>", opts)
 vim.keymap.set("n", "<leader>z", ":Telescope buffers<CR>", opts)
+vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.references()<CR>", opts)
